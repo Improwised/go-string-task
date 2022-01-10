@@ -66,14 +66,11 @@ func wholeStory(str string) string {
 }
 
 func storyStats(str string) ([]string, []string, int, []string) {
-	var avgLenWords = []string{}
 	var shortestWords []string
-	var shortestWordsLen = len(str)
-	var longestWordsLen = 0
 	var longesttWords []string
-	var avgWordLen = 0
-	var totalWordLen = 0
-	var intCounter = 0
+	var avgLenWords = []string{}
+	var shortestWordsLen = len(str)
+	var longestWordsLen, avgWordLen, totalWordLen, intCounter = 0, 0, 0, 0
 
 	if testValidity(str) {
 		values := strings.Split(str, "-")
@@ -110,11 +107,13 @@ func storyStats(str string) ([]string, []string, int, []string) {
 
 // generate will generate valid/invalid method based on argument
 func generate(correct bool) string {
+	var minRep = 2
+	var minSubStrLen = 2
 	var subStrs []string
 	if correct {
-		for i := 0; i < rand.Intn(10)+2; i++ {
-			subStrs = append(subStrs, getSubStr(rand.Intn(5)+2, digits))
-			subStrs = append(subStrs, getSubStr(rand.Intn(5)+2, letters))
+		for i := 0; i < rand.Intn(10)+minRep; i++ {
+			subStrs = append(subStrs, getSubStr(rand.Intn(5)+minSubStrLen, digits))
+			subStrs = append(subStrs, getSubStr(rand.Intn(5)+minSubStrLen, letters))
 		}
 		return strings.Join(subStrs, "-")
 	}
