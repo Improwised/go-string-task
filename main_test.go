@@ -29,5 +29,13 @@ func Test_averageNumber(t *testing.T) {
 	assert.Equal(t, float64(319592), averageNumber("7428-nyuit-773615-ft-775287-kycg-37164-wwsm-4466-iuorxi"))
 
 	assert.Equal(t, float64(0), averageNumber("some-invalid-string"))
+}
 
+func Test_wholeStory(t *testing.T) {
+	assert.Equal(t, "hhd fgfdh fddhf fddf", wholeStory("50-hhd-50-fgfdh-50-fddhf-150-fddf"))
+	assert.Equal(t, "mva alwt nv", wholeStory("81-mva-395-alwt-608302-nv"))
+	assert.Equal(t, "nnnfx xhk", wholeStory("7844-nnnfx-2145-xhk"))
+	assert.Equal(t, "fvdxe bpxy lfo cxo fygx zsvfli", wholeStory("02-fvdxe-536-bpxy-346-lfo-556537-cxo-59666-fygx-24615-zsvfli"))
+	assert.Equal(t, "pzd rcgo ucmfeq zhpqwb", wholeStory("3089-pzd-027403-rcgo-469704-ucmfeq-46-zhpqwb"))
+	assert.Equal(t, "", wholeStory("7428"))
 }

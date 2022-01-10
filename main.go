@@ -41,3 +41,18 @@ func averageNumber(str string) float64 {
 	}
 	return 0
 }
+
+// wholeStory returns all words of given string joined by space
+func wholeStory(str string) string {
+	var story []string
+	if testValidity(str) {
+		values := strings.Split(str, "-")
+		for index, val := range values {
+			if index%2 != 0 {
+				story = append(story, val)
+			}
+		}
+		return strings.Join(story, " ")
+	}
+	return ""
+}
