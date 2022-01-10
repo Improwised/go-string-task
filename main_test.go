@@ -19,3 +19,15 @@ func Test_testValidity(t *testing.T) {
 	assert.Equal(t, false, testValidity("-67-fedr-333-gh"))
 	assert.Equal(t, false, testValidity("67-fedr-333-gh-"))
 }
+
+func Test_averageNumber(t *testing.T) {
+	assert.Equal(t, float64(75), averageNumber("50-hhd-50-fgfdh-50-fddhf-150-fddf"))
+	assert.Equal(t, float64(202926), averageNumber("81-mva-395-alwt-608302-nv"))
+	assert.Equal(t, float64(4994.5), averageNumber("7844-nnnfx-2145-xhk"))
+	assert.Equal(t, float64(106950.33333333333), averageNumber("02-fvdxe-536-bpxy-346-lfo-556537-cxo-59666-fygx-24615-zsvfli"))
+	assert.Equal(t, float64(125060.5), averageNumber("3089-pzd-027403-rcgo-469704-ucmfeq-46-zhpqwb"))
+	assert.Equal(t, float64(319592), averageNumber("7428-nyuit-773615-ft-775287-kycg-37164-wwsm-4466-iuorxi"))
+
+	assert.Equal(t, float64(0), averageNumber("some-invalid-string"))
+
+}
