@@ -2,19 +2,27 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 )
 
+var letters = []rune("abcdefghijklmnopqrstuvwxyz")
+var digits = []rune("1234567890")
+
 func main() {
-	fmt.Println(testValidity("123-qwert-678-tgfhg"))
-	fmt.Println(averageNumber("123-qwert-678-tgfhg"))
-	fmt.Println(wholeStory("123-qwert-678-tgfhg"))
-	fmt.Println(storyStats("123-qwert-678-tgfhg"))
+	rand.Seed(time.Now().UnixNano())
+	generated := generate(true)
+	fmt.Println(generated)
+	fmt.Println(generate(false))
+	fmt.Println(testValidity(generated))
+	fmt.Println(averageNumber(generated))
+	fmt.Println(wholeStory(generated))
+	fmt.Println(storyStats(generated))
 }
 
-// testValidity returns true if given string is matching regex
 func testValidity(str string) bool {
 	matched, err := regexp.MatchString("^([0-9]+-[a-zA-Z]+)+(-?[0-9]+-[a-zA-Z]+)*$", str)
 	if err != nil {
@@ -23,7 +31,6 @@ func testValidity(str string) bool {
 	return matched
 }
 
-// averageNumber will return average of all words in float64
 func averageNumber(str string) float64 {
 	var result float64
 	var intCounter = 0
@@ -44,7 +51,6 @@ func averageNumber(str string) float64 {
 	return 0
 }
 
-// wholeStory returns all words of given string joined by space
 func wholeStory(str string) string {
 	var story []string
 	if testValidity(str) {
@@ -59,7 +65,6 @@ func wholeStory(str string) string {
 	return ""
 }
 
-// storyStats will return shortest word, longest word, average length of all words and words which have average length
 func storyStats(str string) ([]string, []string, int, []string) {
 	var avgLenWords = []string{}
 	var shortestWords []string
@@ -101,4 +106,25 @@ func storyStats(str string) ([]string, []string, int, []string) {
 		return shortestWords, longesttWords, avgWordLen, avgLenWords
 	}
 	return []string{}, []string{}, 0, []string{}
+}
+
+// generate will generate valid/invalid method based on argument
+func generate(correct bool) string {
+	var subStrs []string
+	if correct {
+		for i := 0; i < rand.Intn(10)+2; i++ {
+			subStrs = append(subStrs, getSubStr(rand.Intn(5)+2, digits))
+			subStrs = append(subStrs, getSubStr(rand.Intn(5)+2, letters))
+		}
+		return strings.Join(subStrs, "-")
+	}
+	return getSubStr(rand.Intn(12)+5, letters)
+}
+
+func getSubStr(n int, choices []rune) string {
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = choices[rand.Intn(len(choices))]
+	}
+	return string(b)
 }

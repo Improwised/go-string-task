@@ -29,6 +29,7 @@ func Test_averageNumber(t *testing.T) {
 	assert.Equal(t, float64(319592), averageNumber("7428-nyuit-773615-ft-775287-kycg-37164-wwsm-4466-iuorxi"))
 
 	assert.Equal(t, float64(0), averageNumber("some-invalid-string"))
+
 }
 
 func Test_wholeStory(t *testing.T) {
